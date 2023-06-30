@@ -15,10 +15,10 @@ class AlamatKirimController extends Controller
     public function index()
     {
         $alamatkirims = AlamatKirim::whereRaw("konsumen_id=?", [auth()->user()->id])
-->paginate();
-$is_no_default = AlamatKirim::whereRaw("konsumen_id=? AND is_default=1", 
-[auth()->user()->id])->first() == null;
-return view('konsumen.alamatkirim.index', compact(['alamatkirims', 'is_no_default']));
+        ->paginate();
+        $is_no_default = AlamatKirim::whereRaw("konsumen_id=? AND is_default=1", 
+        [auth()->user()->id])->first() == null;
+        return view('konsumen.alamatkirim.index', compact(['alamatkirims', 'is_no_default']));
     }
 
     /**
@@ -42,9 +42,11 @@ return view('konsumen.alamatkirim.index', compact(['alamatkirims', 'is_no_defaul
             'alamat.required' => 'Alamat harus diisi!'
            ])->validate();
            try{
-            $alamat_kirim = new alamatkirim();
+            $alamat_kirim = new AlamatKirim();
+            $alamat_kirim->konsumen_id = auth()->user()->id;
             $alamat_kirim->nama_penerima = $request->nama_penerima;
             $alamat_kirim->alamat = $request->alamat;
+            $alamat_kirim->is_default = 0;
             $alamat_kirim->save();
            }catch(\Exception $e){
             return redirect()->back()->withInput()->withErrors(['msg' => $e->getMessage()]);
@@ -98,11 +100,11 @@ return view('konsumen.alamatkirim.index', compact(['alamatkirims', 'is_no_defaul
     public function destroy(string $id)
     {
         try{
-            $alamat_kirim = Alamat_Kirim::find($id);
+            $alamat_kirim = AlamatKirim::find($id);
             $alamat_kirim->delete();
-        }catch(\Exception $e){
+           }catch(\Exception $e){
             return redirect()->back()->withInput()->withErrors(['msg' => $e->getMessage()]);
-        }
+           }
            return redirect('/konsumen/alamatkirim')->with('success', 'Berhasil hapus data');
     }
 

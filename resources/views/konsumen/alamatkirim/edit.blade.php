@@ -7,9 +7,13 @@
  style="display:inline">
  @csrf
  <label for="nama_penerima" class="col-form-label">Nama</label>
- <input type="text" class="form-control" name="nama_penerima" value="{{ old('nama_penerima', $alamat_kirim->nama_penerima) }}"/>
+ <input type="text" class="form-control"
+ name="nama_penerima"
+ value="{{ old('nama_penerima', $alamat_kirim->nama_penerima) }}"/>
  <label for="alamat" class="col-form-label">Alamat</label>
- <input type="text" class="form-control" name="alamat" value="{{ old('alamat', $alamat_kirim->alamat) }}"/>
+ <textarea class="form-control"
+ name="alamat">{{ old('alamat', $alamat_kirim->alamat) }}
+ </textarea>
  <br/>
  <button class="btn btn-primary" style="submit">SIMPAN</button>
  <a href="{{ url('/konsumen/alamatkirim') }}" class="btn">BATAL</a>
