@@ -36,6 +36,37 @@
  </div>
  </div>
  <div class="row">
+ <div class="col-4 pizza-card pizza-primary">
+ <div class="row" style="padding-left:5px;padding-right:-25px">
+ <div class="col">
+ Order batal bulan ini
+ </div>
+ <div class="col">
+ {{ $order_batal_bulan_ini }}
+ </div>
+ </div>
+ </div>
+ <div class="col-4 pizza-card pizza-primary">
+ <div class="row" style="padding-left:5px;padding-right:-25px">
+ <div class="col">
+ Pemasukan hari ini
+ </div>
+ <div class="col">
+ {{ $pemasukan_hari_ini }}
+ </div>
+ </div>
+ </div>
+ <div class="col-4 pizza-card pizza-primary">
+ <div class="row" style="padding-left:0px;padding-right:-170px">
+ <div class="col">
+ Rata pemasukan bulan
+ </div>
+ <div class="col">
+ {{ $ratarata_pemasukan_bulan_ini }}
+ </div>
+ </div>
+ </div>
+ <div class="row">
  <div class="col-10">&nbsp;</div>
  <div class="col-2">
  <form>

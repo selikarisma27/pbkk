@@ -47,8 +47,16 @@ class HomeController extends Controller
         $order_bulan_ini = Jual::whereRaw("status_jual='TIBA' AND waktu_pesan>=? AND
         waktu_pesan<?", [Carbon::today()->firstOfMonth(), Carbon::today()
         ->firstOfMonth()->addMonths(1)])->count();
+        $order_batal_bulan_ini = Jual::whereRaw("status_jual='BATAL' AND waktu_pesan>=? AND
+        waktu_pesan<?", [Carbon::today()->firstOfMonth(), Carbon::today()
+        ->firstOfMonth()->addMonths(1)])->count();
+        $pemasukan_hari_ini = Jual::whereRaw("status_jual='TIBA' AND waktu_pesan>=? AND
+        waktu_pesan<?", [Carbon::today()->subDays(0), Carbon::today()->addDays(0)])->sum('total_harga');
+        $ratarata_pemasukan_bulan_ini = Jual::whereRaw("status_jual='TIBA' AND waktu_pesan>=? AND
+        waktu_pesan<?", [Carbon::today()->firstOfMonth(), Carbon::today()
+        ->firstOfMonth()->addMonths(1)])->avg('total_harga');
         return view('resto.home.index', compact('juals','status_jual','arr_status_jual',
-        'jual', 'rating_50', 'rating_semua','order_minggu_terakhir','order_bulan_ini'));
+        'jual', 'rating_50', 'rating_semua','order_minggu_terakhir','order_bulan_ini','order_batal_bulan_ini','pemasukan_hari_ini','ratarata_pemasukan_bulan_ini'));
         
        }
 }

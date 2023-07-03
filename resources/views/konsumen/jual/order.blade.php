@@ -20,7 +20,7 @@
  @csrf
  <img src="{!! $cur->pizza_url == ''? asset('images/default.jpg') 
  : asset($cur->pizza_url); !!}"
- style="width:100%;height:250px;object-fit:cover"
+ style="width:80%;height:250px;object-fit:cover"
  alt="{!! 'Gambar '.$cur->nama_pizza !!}" /><br/>
  {!! $cur->nama_pizza !!}<br/>
  {!! $cur->harga_satuan !!}<br/>
